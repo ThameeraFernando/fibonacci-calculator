@@ -1,0 +1,38 @@
+name: Deploy MultiDocker
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - name: login to DockerHub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: build test image
+        run: docker build -t thameerafernando/multi-container-tests -f ./client/Dockerfile.dev ./client
+      - name: run test image
+        run: docker run -e CI=true thameerafernando/multi-container-tests npm run test
+
+      - name: build client image
+        run: docker build -t thameerafernando/fib-client ./client
+      - name: build worker image
+        run: docker build -t thameerafernando/fib-worker ./worker
+      - name: build server image
+        run: docker build -t thameerafernando/fib-server ./server
+      - name: build nginx image
+        run: docker build -t thameerafernando/fib-nginx ./nginx
+
+      - name: push client image to DockerHub
+        run: docker build -t thameerafernando/fib-client ./client
+      - name: build worker image to DockerHub
+        run: docker build -t thameerafernando/fib-worker ./worker
+      - name: build server image to DockerHub
+        run: docker build -t thameerafernando/fib-server ./server
+      - name: build nginx image to DockerHub
+        run: docker build -t thameerafernando/fib-nginx ./nginx
