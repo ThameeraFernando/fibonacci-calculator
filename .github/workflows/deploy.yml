@@ -1,4 +1,4 @@
-name: Deploy MultiDocker
+name: Deploy Multi docker containers
 on:
   push:
     branches:
