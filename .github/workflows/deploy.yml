@@ -29,10 +29,10 @@ jobs:
         run: docker build -t thameerafernando/fib-nginx ./nginx
 
       - name: push client image to DockerHub
-        run: docker build -t thameerafernando/fib-client ./client
-      - name: build worker image to DockerHub
-        run: docker build -t thameerafernando/fib-worker ./worker
-      - name: build server image to DockerHub
-        run: docker build -t thameerafernando/fib-server ./server
-      - name: build nginx image to DockerHub
-        run: docker build -t thameerafernando/fib-nginx ./nginx
+        run: docker push thameerafernando/fib-client
+      - name: push worker image to DockerHub
+        run: docker run -t thameerafernando/fib-worker
+      - name: push server image to DockerHub
+        run: docker run -t thameerafernando/fib-server
+      - name: push nginx image to DockerHub
+        run: docker run -t thameerafernando/fib-nginx
