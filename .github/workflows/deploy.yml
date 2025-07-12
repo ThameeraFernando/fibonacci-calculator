@@ -31,8 +31,8 @@ jobs:
       - name: push client image to DockerHub
         run: docker push thameerafernando/fib-client
       - name: push worker image to DockerHub
-        run: docker run -t thameerafernando/fib-worker
+        run: docker push -t thameerafernando/fib-worker
       - name: push server image to DockerHub
-        run: docker run -t thameerafernando/fib-server
+        run: docker push -t thameerafernando/fib-server
       - name: push nginx image to DockerHub
-        run: docker run -t thameerafernando/fib-nginx
+        run: docker push -t thameerafernando/fib-nginx
